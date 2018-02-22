@@ -1,0 +1,23 @@
+#! /bin/bash
+
+type openvpn >/dev/null 2>&1 || { echo >&2 "Please install OpenVPN first."; exit 1; }
+
+
+DIR=/home/daniel/Documents/VPNconfig/ # Directory of .ovpn files
+
+cd $DIR
+
+select FILENAME in *@tigervpn*;
+do
+     echo "You picked $FILENAME."
+     FILE=$FILENAME
+     break
+done
+
+AUTH=./auth.txt # auth.txt in same dir as .ovpn files contains username on first line and password on second.
+# Don't forget to "chmod uog-rwx auth.txt"!
+
+
+
+sudo openvpn --config "${FILE}" --auth-nocache --auth-user-pass "${AUTH}" --script-security 2 --up /etc/openvpn/update-resolv-conf --down /etc/openvpn/update-resolv-conf
+
