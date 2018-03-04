@@ -1,0 +1,2 @@
+/usr/bin/firefox localhost:3838
+docker run -p 3838:3838 --rm -it -v /home/daniel/Documents/IMSM/Shiny/shinyApps:/srv/shiny-server/ -v /home/daniel/Documents/shiny/dockerlog:/var/log/shiny-server/ shinyserv
