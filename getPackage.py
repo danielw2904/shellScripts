@@ -25,6 +25,6 @@ rLibs = [name.strip("'") for name in rLibs]
 rLibs = [name.strip('"') for name in rLibs]
 rLibs = list(set(rLibs) - set(installed))
 
-command = 'install.packages("' + '","'.join(rLibs) + '")'
+command = 'install.packages(c("' + '","'.join(rLibs) + '"))'
 print("Run: \n")
 print(command + "\n")
