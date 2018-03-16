@@ -1,0 +1,8 @@
+#!/bin/bash
+
+CUR=$PWD
+
+cd $CUR
+mkdir .vscode
+
+cp /home/daniel/Documents/git/shellScripts/tasks.json ./.vscode/tasks.json
