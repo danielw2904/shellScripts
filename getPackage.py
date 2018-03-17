@@ -24,8 +24,8 @@ https://github.com/rstudio/packrat/blob/master/R/dependencies.R'''
 
 rDirect = re.findall('[A-Za-z0-9]*\s*:{2,3}(?!:)', ftext)
 rDirect = [name.strip('::+?') for name in rDirect]
-rLibs = re.findall('(?<=library)\s*\(\s*[\s"\'A-Za-z0-9]*', ftext)
-rReq = re.findall('(?<=require)\s*\(\s*[\s"\'A-Za-z0-9]*', ftext)
+rLibs = re.findall('(?<=library)\s*\(\s*["\'A-Za-z0-9]*', ftext)
+rReq = re.findall('(?<=require)\s*\(\s*["\'A-Za-z0-9]*', ftext)
 rName = re.findall('(?<=loadNamespace)\s*\(\s*[\s"\'A-Za-z0-9]*', ftext)
 rReqname = re.findall('(?<=requireNamespace)\s*\(\s*[\s"\'A-Za-z0-9]*', ftext)
 rLibs = rLibs + rReq + rName + rReqname + rDirect
