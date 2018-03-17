@@ -18,13 +18,27 @@ else:
 rfile = open(fname, 'r')
 ftext = rfile.read()
 rfile.close()
-rLibs = re.findall('(?<=library\()["\'A-Za-z0-9]*', ftext)
-rReq = re.findall('(?<=require\()["\'A-Za-z0-9]*', ftext)
+rLibs = re.findall('(?<=library)\s*\(\s*[\s"\'A-Za-z0-9]*', ftext)
+rReq = re.findall('(?<=require)\s*\(\s*[\s"\'A-Za-z0-9]*', ftext)
 rLibs = rLibs + rReq
+rLibs = [re.sub('[\s\(]*', '', name) for name in rLibs]
 rLibs = [name.strip("'") for name in rLibs]
 rLibs = [name.strip('"') for name in rLibs]
 rLibs = list(set(rLibs) - set(installed))
-
-command = 'install.packages(c("' + '","'.join(rLibs) + '"))'
+command = '", "'.join(rLibs)
+command = command.lstrip('", ')
+command = 'install.packages(c("' + command + '"))'
 print("Run: \n")
 print(command + "\n")
+
+try:
+    import pyperclip
+except ModuleNotFoundError:
+    print('Cannot copy to clipboard. Run: \n')
+    print('pip install pyperclip \n')
+    print('OR \n')
+    print('conda install -c conda-forge pyperclip \n') 
+    print('to enable this functionality')
+else:
+    pyperclip.copy(command)
+    print('Command copied to clipboard')
