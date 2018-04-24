@@ -1,7 +1,8 @@
-/usr/bin/firefox localhost:3838
+
 docker run -d -p 3838:3838 --rm -it \
   -v rlibs:/usr/local/lib/R/site-library/ \
   -v /home/daniel/Documents/git/imsm/mrda/shinyApps/:/srv/shiny-server/ \
   -v /home/daniel/Documents/docker/log:/var/log/shiny-server/ \
+  -m 4096m \
   shiny
   
